@@ -26,6 +26,7 @@ provider:
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
     ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-congvt-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
+    AUTH_0_SECRET: -0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI
 
   logs:
     # Enable API Gateway logs
@@ -70,6 +71,11 @@ functions:
   # To validate incoming HTTP requests, we have provided the request schemas in function definition below. 
   CreateTodo:
     handler: src/lambda/http/createTodo.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: 
+          - dynamodb:PutItem
+        Resource: "*"
     events:
       - http:
           method: post
@@ -84,28 +90,50 @@ functions:
   # Provide property for setting up CORS, Authorizer, iamRoleStatements, and request schemas
   UpdateTodo:
     handler: src/lambda/http/updateTodo.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: 
+          - dynamodb:UpdateItem
+        Resource: "*"
     events:
       - http:
           method: patch
           path: todos/{todoId}
+          cors: true
+          authorizer: Auth
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
   DeleteTodo:
     handler: src/lambda/http/deleteTodo.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: 
+          - dynamodb:DeleteItem
+        Resource: "*"
     events:
       - http:
           method: delete
           path: todos/{todoId}
+          cors: true
+          authorizer: Auth
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
   GenerateUploadUrl:
     handler: src/lambda/http/generateUploadUrl.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:PutObject
+          - s3:GetObject
+        Resource: arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*
     events:
       - http:
           method: post
           path: todos/{todoId}/attachment
+          cors: true
+          authorizer: Auth
 
 resources:
   Resources:
