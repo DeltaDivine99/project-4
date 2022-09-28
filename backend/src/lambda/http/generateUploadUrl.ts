@@ -2,7 +2,6 @@ import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { createAttachmentPresignedUrl } from '../../helpers/fileManagement/attachmentUtils'
-import { getUserId } from '../utils'
 // import * as middy from 'middy'
 // import { cors, httpErrorHandler } from 'middy/middlewares'
 // import { getUserId } from '../utils'
