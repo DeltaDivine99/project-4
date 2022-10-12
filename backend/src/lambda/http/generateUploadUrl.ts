@@ -7,10 +7,10 @@ import { createAttachmentPresignedUrl } from '../../helpers/fileManagement/attac
 // import { getUserId } from '../utils'
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    const todoId = event.pathParameters.todoId
+    const photoId = event.pathParameters.photoId
     // TODO: Return a presigned URL to upload a file for a TODO item with the provided id
     
-    const uploadUrl = await createAttachmentPresignedUrl(event, todoId);
+    const uploadUrl = await createAttachmentPresignedUrl(event, photoId);
     // return S3 upload URL: 
     return {
         statusCode: 200, 

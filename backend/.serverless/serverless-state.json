@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "serverless-todo-app",
+    "service": "serverless-photo-app",
     "serviceObject": {
-      "name": "serverless-todo-app"
+      "name": "serverless-photo-app"
     },
     "provider": {
       "name": "aws",
@@ -14,9 +14,9 @@
         "apiGateway": true
       },
       "environment": {
-        "TODOS_TABLE": "Todos-dev",
-        "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-        "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+        "PHOTOS_TABLE": "Photos-dev",
+        "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+        "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
         "SIGNED_URL_EXPIRATION": "300",
         "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
       },
@@ -116,37 +116,37 @@
           "AuthLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-todo-app-dev-Auth"
+              "LogGroupName": "/aws/lambda/serverless-photo-app-dev-Auth"
             }
           },
-          "GetTodosLogGroup": {
+          "GetPhotosLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-todo-app-dev-GetTodos"
+              "LogGroupName": "/aws/lambda/serverless-photo-app-dev-GetPhotos"
             }
           },
-          "CreateTodoLogGroup": {
+          "CreatePhotoLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-todo-app-dev-CreateTodo"
+              "LogGroupName": "/aws/lambda/serverless-photo-app-dev-CreatePhoto"
             }
           },
-          "UpdateTodoLogGroup": {
+          "UpdatePhotoLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-todo-app-dev-UpdateTodo"
+              "LogGroupName": "/aws/lambda/serverless-photo-app-dev-UpdatePhoto"
             }
           },
-          "DeleteTodoLogGroup": {
+          "DeletePhotoLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-todo-app-dev-DeleteTodo"
+              "LogGroupName": "/aws/lambda/serverless-photo-app-dev-DeletePhoto"
             }
           },
           "GenerateUploadUrlLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-todo-app-dev-GenerateUploadUrl"
+              "LogGroupName": "/aws/lambda/serverless-photo-app-dev-GenerateUploadUrl"
             }
           },
           "IamRoleLambdaExecution": {
@@ -174,7 +174,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "dev",
                         "lambda"
                       ]
@@ -191,7 +191,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev*:*"
                           }
                         ]
                       },
@@ -202,7 +202,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev*:*:*"
                           }
                         ]
                       },
@@ -228,7 +228,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-todo-app",
+                    "serverless-photo-app",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -279,25 +279,25 @@
                           },
                           {
                             "Fn::GetAtt": [
-                              "GetTodosLogGroup",
+                              "GetPhotosLogGroup",
                               "Arn"
                             ]
                           },
                           {
                             "Fn::GetAtt": [
-                              "CreateTodoLogGroup",
+                              "CreatePhotoLogGroup",
                               "Arn"
                             ]
                           },
                           {
                             "Fn::GetAtt": [
-                              "UpdateTodoLogGroup",
+                              "UpdatePhotoLogGroup",
                               "Arn"
                             ]
                           },
                           {
                             "Fn::GetAtt": [
-                              "DeleteTodoLogGroup",
+                              "DeletePhotoLogGroup",
                               "Arn"
                             ]
                           },
@@ -322,11 +322,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/serverless-todo-app.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/serverless-photo-app.zip"
               },
               "Handler": "s_Auth.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-todo-app-dev-Auth",
+              "FunctionName": "serverless-photo-app-dev-Auth",
               "MemorySize": 1024,
               "Timeout": 6,
               "TracingConfig": {
@@ -334,9 +334,9 @@
               },
               "Environment": {
                 "Variables": {
-                  "TODOS_TABLE": "Todos-dev",
-                  "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-                  "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+                  "PHOTOS_TABLE": "Photos-dev",
+                  "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+                  "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
                   "SIGNED_URL_EXPIRATION": "300",
                   "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
                 }
@@ -352,18 +352,18 @@
               "AuthLogGroup"
             ]
           },
-          "GetTodosLambdaFunction": {
+          "GetPhotosLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/serverless-todo-app.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/serverless-photo-app.zip"
               },
-              "Handler": "s_GetTodos.handler",
+              "Handler": "s_GetPhotos.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-todo-app-dev-GetTodos",
+              "FunctionName": "serverless-photo-app-dev-GetPhotos",
               "MemorySize": 1024,
               "Timeout": 6,
               "TracingConfig": {
@@ -371,37 +371,37 @@
               },
               "Environment": {
                 "Variables": {
-                  "TODOS_TABLE": "Todos-dev",
-                  "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-                  "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+                  "PHOTOS_TABLE": "Photos-dev",
+                  "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+                  "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
                   "SIGNED_URL_EXPIRATION": "300",
                   "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
                 }
               },
               "Role": {
                 "Fn::GetAtt": [
-                  "GetTodosIamRoleLambdaExecution",
+                  "GetPhotosIamRoleLambdaExecution",
                   "Arn"
                 ]
               }
             },
             "DependsOn": [
-              "GetTodosIamRoleLambdaExecution",
-              "GetTodosLogGroup"
+              "GetPhotosIamRoleLambdaExecution",
+              "GetPhotosLogGroup"
             ]
           },
-          "CreateTodoLambdaFunction": {
+          "CreatePhotoLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/serverless-todo-app.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/serverless-photo-app.zip"
               },
-              "Handler": "s_CreateTodo.handler",
+              "Handler": "s_CreatePhoto.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-todo-app-dev-CreateTodo",
+              "FunctionName": "serverless-photo-app-dev-CreatePhoto",
               "MemorySize": 1024,
               "Timeout": 6,
               "TracingConfig": {
@@ -409,37 +409,37 @@
               },
               "Environment": {
                 "Variables": {
-                  "TODOS_TABLE": "Todos-dev",
-                  "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-                  "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+                  "PHOTOS_TABLE": "Photos-dev",
+                  "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+                  "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
                   "SIGNED_URL_EXPIRATION": "300",
                   "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
                 }
               },
               "Role": {
                 "Fn::GetAtt": [
-                  "CreateTodoIamRoleLambdaExecution",
+                  "CreatePhotoIamRoleLambdaExecution",
                   "Arn"
                 ]
               }
             },
             "DependsOn": [
-              "CreateTodoIamRoleLambdaExecution",
-              "CreateTodoLogGroup"
+              "CreatePhotoIamRoleLambdaExecution",
+              "CreatePhotoLogGroup"
             ]
           },
-          "UpdateTodoLambdaFunction": {
+          "UpdatePhotoLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/serverless-todo-app.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/serverless-photo-app.zip"
               },
-              "Handler": "s_UpdateTodo.handler",
+              "Handler": "s_UpdatePhoto.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-todo-app-dev-UpdateTodo",
+              "FunctionName": "serverless-photo-app-dev-UpdatePhoto",
               "MemorySize": 1024,
               "Timeout": 6,
               "TracingConfig": {
@@ -447,37 +447,37 @@
               },
               "Environment": {
                 "Variables": {
-                  "TODOS_TABLE": "Todos-dev",
-                  "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-                  "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+                  "PHOTOS_TABLE": "Photos-dev",
+                  "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+                  "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
                   "SIGNED_URL_EXPIRATION": "300",
                   "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
                 }
               },
               "Role": {
                 "Fn::GetAtt": [
-                  "UpdateTodoIamRoleLambdaExecution",
+                  "UpdatePhotoIamRoleLambdaExecution",
                   "Arn"
                 ]
               }
             },
             "DependsOn": [
-              "UpdateTodoIamRoleLambdaExecution",
-              "UpdateTodoLogGroup"
+              "UpdatePhotoIamRoleLambdaExecution",
+              "UpdatePhotoLogGroup"
             ]
           },
-          "DeleteTodoLambdaFunction": {
+          "DeletePhotoLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/serverless-todo-app.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/serverless-photo-app.zip"
               },
-              "Handler": "s_DeleteTodo.handler",
+              "Handler": "s_DeletePhoto.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-todo-app-dev-DeleteTodo",
+              "FunctionName": "serverless-photo-app-dev-DeletePhoto",
               "MemorySize": 1024,
               "Timeout": 6,
               "TracingConfig": {
@@ -485,23 +485,23 @@
               },
               "Environment": {
                 "Variables": {
-                  "TODOS_TABLE": "Todos-dev",
-                  "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-                  "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+                  "PHOTOS_TABLE": "Photos-dev",
+                  "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+                  "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
                   "SIGNED_URL_EXPIRATION": "300",
                   "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
                 }
               },
               "Role": {
                 "Fn::GetAtt": [
-                  "DeleteTodoIamRoleLambdaExecution",
+                  "DeletePhotoIamRoleLambdaExecution",
                   "Arn"
                 ]
               }
             },
             "DependsOn": [
-              "DeleteTodoIamRoleLambdaExecution",
-              "DeleteTodoLogGroup"
+              "DeletePhotoIamRoleLambdaExecution",
+              "DeletePhotoLogGroup"
             ]
           },
           "GenerateUploadUrlLambdaFunction": {
@@ -511,11 +511,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/serverless-todo-app.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/serverless-photo-app.zip"
               },
               "Handler": "s_GenerateUploadUrl.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-todo-app-dev-GenerateUploadUrl",
+              "FunctionName": "serverless-photo-app-dev-GenerateUploadUrl",
               "MemorySize": 1024,
               "Timeout": 6,
               "TracingConfig": {
@@ -523,9 +523,9 @@
               },
               "Environment": {
                 "Variables": {
-                  "TODOS_TABLE": "Todos-dev",
-                  "TODOS_CREATED_AT_INDEX": "CreatedAtIndex",
-                  "ATTACHMENT_S3_BUCKET": "serverless-c4-todo-images-congvt-dev",
+                  "PHOTOS_TABLE": "Photos-dev",
+                  "PHOTOS_CREATED_AT_INDEX": "CreatedAtIndex",
+                  "ATTACHMENT_S3_BUCKET": "serverless-c4-photo-images-congvt-dev",
                   "SIGNED_URL_EXPIRATION": "300",
                   "AUTH_0_SECRET": "-0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI"
                 }
@@ -542,70 +542,70 @@
               "GenerateUploadUrlLogGroup"
             ]
           },
-          "AuthLambdaVersionZud4Wx1u9DIV6KR56ycDNozNJB82Naug3LAXBGFw": {
+          "AuthLambdaVersionC6WGWmIAo7XyzYTY7y91OUUtnum5Kogn3ho3if9Z0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AuthLambdaFunction"
               },
-              "CodeSha256": "pk4T4ABg/q6JOVSV8hxiP2CZRmx2+aL6ivHHK1Zr7qI="
+              "CodeSha256": "D5jKPtjOTTi1G6eWlK+TrTRMrM69Y7/T4j4SvyktAoU="
             }
           },
-          "GetTodosLambdaVersion9LL5g2Eke5WTO0iVx3fvMPpSWjQFNKzseSglAbd1gvo": {
+          "GetPhotosLambdaVersionxepFAmYVNXP9c9eW4eGu4MVaDRy3LrNhp8gVY3YTME": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetTodosLambdaFunction"
+                "Ref": "GetPhotosLambdaFunction"
               },
-              "CodeSha256": "pk4T4ABg/q6JOVSV8hxiP2CZRmx2+aL6ivHHK1Zr7qI="
+              "CodeSha256": "D5jKPtjOTTi1G6eWlK+TrTRMrM69Y7/T4j4SvyktAoU="
             }
           },
-          "CreateTodoLambdaVersioni5ByGUeR19Zb6CjKjmUlIVH9z0PHftaJUkmHuiA75sw": {
+          "CreatePhotoLambdaVersionpZjhF6llrzHLLYSRhGC07jtQOBVjDRNOAqL3INxN8g": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "CreateTodoLambdaFunction"
+                "Ref": "CreatePhotoLambdaFunction"
               },
-              "CodeSha256": "pk4T4ABg/q6JOVSV8hxiP2CZRmx2+aL6ivHHK1Zr7qI="
+              "CodeSha256": "D5jKPtjOTTi1G6eWlK+TrTRMrM69Y7/T4j4SvyktAoU="
             }
           },
-          "UpdateTodoLambdaVersionzU9OxoYm3Usbi7U7nNDta3PNV6OdjgmVbuURGYTmA8": {
+          "UpdatePhotoLambdaVersiontenJKJZ0PqfuEmOysnZ2M9r7ogf3T9qlsRjnAfcd9k": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "UpdateTodoLambdaFunction"
+                "Ref": "UpdatePhotoLambdaFunction"
               },
-              "CodeSha256": "pk4T4ABg/q6JOVSV8hxiP2CZRmx2+aL6ivHHK1Zr7qI="
+              "CodeSha256": "D5jKPtjOTTi1G6eWlK+TrTRMrM69Y7/T4j4SvyktAoU="
             }
           },
-          "DeleteTodoLambdaVersionj1EGVrPVyBX6SBpV6EKoWGG5IFdE4AC5jUjmzGyQhGw": {
+          "DeletePhotoLambdaVersionuCJYEvP1MP1Wm4HCTeJtPuGpETHfTBLFlGHWjgjHas": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "DeleteTodoLambdaFunction"
+                "Ref": "DeletePhotoLambdaFunction"
               },
-              "CodeSha256": "pk4T4ABg/q6JOVSV8hxiP2CZRmx2+aL6ivHHK1Zr7qI="
+              "CodeSha256": "D5jKPtjOTTi1G6eWlK+TrTRMrM69Y7/T4j4SvyktAoU="
             }
           },
-          "GenerateUploadUrlLambdaVersionYe5c7prJpsVqAByeSGqZSJiQnotM7IPGbcKRlCHd9x4": {
+          "GenerateUploadUrlLambdaVersionEPc2aXy3UBVgULPfYJVUN3Bw9WWBUxW5vpFTEWZ1M": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GenerateUploadUrlLambdaFunction"
               },
-              "CodeSha256": "pk4T4ABg/q6JOVSV8hxiP2CZRmx2+aL6ivHHK1Zr7qI="
+              "CodeSha256": "D5jKPtjOTTi1G6eWlK+TrTRMrM69Y7/T4j4SvyktAoU="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-serverless-todo-app",
+              "Name": "dev-serverless-photo-app",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -614,7 +614,7 @@
               "Policy": ""
             }
           },
-          "ApiGatewayResourceTodos": {
+          "ApiGatewayResourcePhotos": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -623,29 +623,29 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "todos",
+              "PathPart": "photos",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceTodosTodoidVar": {
+          "ApiGatewayResourcePhotosPhotoidVar": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
-                "Ref": "ApiGatewayResourceTodos"
+                "Ref": "ApiGatewayResourcePhotos"
               },
-              "PathPart": "{todoId}",
+              "PathPart": "{photoId}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceTodosTodoidVarAttachment": {
+          "ApiGatewayResourcePhotosPhotoidVarAttachment": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
-                "Ref": "ApiGatewayResourceTodosTodoidVar"
+                "Ref": "ApiGatewayResourcePhotosPhotoidVar"
               },
               "PathPart": "attachment",
               "RestApiId": {
@@ -653,7 +653,7 @@
               }
             }
           },
-          "ApiGatewayMethodTodosOptions": {
+          "ApiGatewayMethodPhotosOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -691,14 +691,14 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodos"
+                "Ref": "ApiGatewayResourcePhotos"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodTodosTodoidVarOptions": {
+          "ApiGatewayMethodPhotosPhotoidVarOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -736,14 +736,14 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodosTodoidVar"
+                "Ref": "ApiGatewayResourcePhotosPhotoidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodTodosTodoidVarAttachmentOptions": {
+          "ApiGatewayMethodPhotosPhotoidVarAttachmentOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -781,20 +781,20 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodosTodoidVarAttachment"
+                "Ref": "ApiGatewayResourcePhotosPhotoidVarAttachment"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodTodosGet": {
+          "ApiGatewayMethodPhotosGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodos"
+                "Ref": "ApiGatewayResourcePhotos"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -822,7 +822,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetTodosLambdaFunction",
+                          "GetPhotosLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -835,13 +835,13 @@
             },
             "DependsOn": "AuthApiGatewayAuthorizer"
           },
-          "ApiGatewayMethodTodosPost": {
+          "ApiGatewayMethodPhotosPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodos"
+                "Ref": "ApiGatewayResourcePhotos"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -869,7 +869,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "CreateTodoLambdaFunction",
+                          "CreatePhotoLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -880,23 +880,23 @@
               },
               "MethodResponses": [],
               "RequestValidatorId": {
-                "Ref": "ApiGatewayServerlesstodoappRequestValidator"
+                "Ref": "ApiGatewayServerlessphotoappRequestValidator"
               },
               "RequestModels": {
                 "application/json": {
-                  "Ref": "ApiGatewayMethodTodosPostApplicationJsonModel"
+                  "Ref": "ApiGatewayMethodPhotosPostApplicationJsonModel"
                 }
               }
             },
             "DependsOn": "AuthApiGatewayAuthorizer"
           },
-          "ApiGatewayMethodTodosTodoidVarPatch": {
+          "ApiGatewayMethodPhotosPhotoidVarPatch": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "PATCH",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodosTodoidVar"
+                "Ref": "ApiGatewayResourcePhotosPhotoidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -924,7 +924,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "UpdateTodoLambdaFunction",
+                          "UpdatePhotoLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -937,13 +937,13 @@
             },
             "DependsOn": "AuthApiGatewayAuthorizer"
           },
-          "ApiGatewayMethodTodosTodoidVarDelete": {
+          "ApiGatewayMethodPhotosPhotoidVarDelete": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "DELETE",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodosTodoidVar"
+                "Ref": "ApiGatewayResourcePhotosPhotoidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -971,7 +971,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "DeleteTodoLambdaFunction",
+                          "DeletePhotoLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -984,13 +984,13 @@
             },
             "DependsOn": "AuthApiGatewayAuthorizer"
           },
-          "ApiGatewayMethodTodosTodoidVarAttachmentPost": {
+          "ApiGatewayMethodPhotosPhotoidVarAttachmentPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTodosTodoidVarAttachment"
+                "Ref": "ApiGatewayResourcePhotosPhotoidVarAttachment"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1031,7 +1031,7 @@
             },
             "DependsOn": "AuthApiGatewayAuthorizer"
           },
-          "ApiGatewayServerlesstodoappRequestValidator": {
+          "ApiGatewayServerlessphotoappRequestValidator": {
             "Type": "AWS::ApiGateway::RequestValidator",
             "Properties": {
               "RestApiId": {
@@ -1039,10 +1039,10 @@
               },
               "ValidateRequestBody": true,
               "ValidateRequestParameters": true,
-              "Name": "serverless-todo-app-dev | Validate request body and querystring parameters"
+              "Name": "serverless-photo-app-dev | Validate request body and querystring parameters"
             }
           },
-          "ApiGatewayMethodTodosPostApplicationJsonModel": {
+          "ApiGatewayMethodPhotosPostApplicationJsonModel": {
             "Type": "AWS::ApiGateway::Model",
             "Properties": {
               "RestApiId": {
@@ -1104,7 +1104,7 @@
               "Type": "TOKEN"
             }
           },
-          "ApiGatewayDeployment1664346071484": {
+          "ApiGatewayDeployment1665542528295": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1113,22 +1113,22 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodTodosOptions",
-              "ApiGatewayMethodTodosTodoidVarOptions",
-              "ApiGatewayMethodTodosTodoidVarAttachmentOptions",
-              "ApiGatewayMethodTodosGet",
-              "ApiGatewayMethodTodosPost",
-              "ApiGatewayMethodTodosTodoidVarPatch",
-              "ApiGatewayMethodTodosTodoidVarDelete",
-              "ApiGatewayMethodTodosTodoidVarAttachmentPost"
+              "ApiGatewayMethodPhotosOptions",
+              "ApiGatewayMethodPhotosPhotoidVarOptions",
+              "ApiGatewayMethodPhotosPhotoidVarAttachmentOptions",
+              "ApiGatewayMethodPhotosGet",
+              "ApiGatewayMethodPhotosPost",
+              "ApiGatewayMethodPhotosPhotoidVarPatch",
+              "ApiGatewayMethodPhotosPhotoidVarDelete",
+              "ApiGatewayMethodPhotosPhotoidVarAttachmentPost"
             ]
           },
-          "GetTodosLambdaPermissionApiGateway": {
+          "GetPhotosLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "GetTodosLambdaFunction",
+                  "GetPhotosLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1197,12 +1197,12 @@
               }
             }
           },
-          "CreateTodoLambdaPermissionApiGateway": {
+          "CreatePhotoLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "CreateTodoLambdaFunction",
+                  "CreatePhotoLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1234,12 +1234,12 @@
               }
             }
           },
-          "UpdateTodoLambdaPermissionApiGateway": {
+          "UpdatePhotoLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "UpdateTodoLambdaFunction",
+                  "UpdatePhotoLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1271,12 +1271,12 @@
               }
             }
           },
-          "DeleteTodoLambdaPermissionApiGateway": {
+          "DeletePhotoLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "DeleteTodoLambdaFunction",
+                  "DeletePhotoLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1348,7 +1348,7 @@
           "ApiGatewayLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/api-gateway/serverless-todo-app-dev"
+              "LogGroupName": "/aws/api-gateway/serverless-photo-app-dev"
             }
           },
           "CustomApiGatewayAccountCloudWatchRole": {
@@ -1389,7 +1389,7 @@
                       "-",
                       [
                         "dev",
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "custom-resources-lambda"
                       ]
                     ]
@@ -1454,9 +1454,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z/custom-resources.zip"
+                "S3Key": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z/custom-resources.zip"
               },
-              "FunctionName": "serverless-todo-app-dev-custom-resource-apigw-cw-role",
+              "FunctionName": "serverless-photo-app-dev-custom-resource-apigw-cw-role",
               "Handler": "api-gateway-cloud-watch-role/handler.handler",
               "MemorySize": 1024,
               "Runtime": "nodejs14.x",
@@ -1472,7 +1472,7 @@
               "IamRoleCustomResourcesLambdaExecution"
             ]
           },
-          "GetTodosIamRoleLambdaExecution": {
+          "GetPhotosIamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
               "AssumeRolePolicyDocument": {
@@ -1497,7 +1497,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "dev",
                         "lambda"
                       ]
@@ -1515,7 +1515,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev-GetTodos:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev-GetPhotos:*:*"
                           }
                         ]
                       },
@@ -1537,9 +1537,9 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-todo-app",
+                    "serverless-photo-app",
                     "dev",
-                    "GetTodos",
+                    "GetPhotos",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -1550,7 +1550,7 @@
               "ManagedPolicyArns": []
             }
           },
-          "CreateTodoIamRoleLambdaExecution": {
+          "CreatePhotoIamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
               "AssumeRolePolicyDocument": {
@@ -1575,7 +1575,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "dev",
                         "lambda"
                       ]
@@ -1593,7 +1593,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev-CreateTodo:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev-CreatePhoto:*:*"
                           }
                         ]
                       },
@@ -1613,9 +1613,9 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-todo-app",
+                    "serverless-photo-app",
                     "dev",
-                    "CreateTodo",
+                    "CreatePhoto",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -1626,7 +1626,7 @@
               "ManagedPolicyArns": []
             }
           },
-          "UpdateTodoIamRoleLambdaExecution": {
+          "UpdatePhotoIamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
               "AssumeRolePolicyDocument": {
@@ -1651,7 +1651,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "dev",
                         "lambda"
                       ]
@@ -1669,7 +1669,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev-UpdateTodo:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev-UpdatePhoto:*:*"
                           }
                         ]
                       },
@@ -1689,9 +1689,9 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-todo-app",
+                    "serverless-photo-app",
                     "dev",
-                    "UpdateTodo",
+                    "UpdatePhoto",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -1702,7 +1702,7 @@
               "ManagedPolicyArns": []
             }
           },
-          "DeleteTodoIamRoleLambdaExecution": {
+          "DeletePhotoIamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
               "AssumeRolePolicyDocument": {
@@ -1727,7 +1727,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "dev",
                         "lambda"
                       ]
@@ -1745,7 +1745,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev-DeleteTodo:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev-DeletePhoto:*:*"
                           }
                         ]
                       },
@@ -1765,9 +1765,9 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-todo-app",
+                    "serverless-photo-app",
                     "dev",
-                    "DeleteTodo",
+                    "DeletePhoto",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -1803,7 +1803,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-todo-app",
+                        "serverless-photo-app",
                         "dev",
                         "lambda"
                       ]
@@ -1821,7 +1821,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-todo-app-dev-GenerateUploadUrl:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-photo-app-dev-GenerateUploadUrl:*:*"
                           }
                         ]
                       },
@@ -1831,7 +1831,7 @@
                           "s3:PutObject",
                           "s3:GetObject"
                         ],
-                        "Resource": "arn:aws:s3:::serverless-c4-todo-images-congvt-dev/*"
+                        "Resource": "arn:aws:s3:::serverless-c4-photo-images-congvt-dev/*"
                       },
                       {
                         "Effect": "Allow",
@@ -1849,7 +1849,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-todo-app",
+                    "serverless-photo-app",
                     "dev",
                     "GenerateUploadUrl",
                     {
@@ -1876,7 +1876,7 @@
               }
             }
           },
-          "TodosTable": {
+          "PhotosTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
               "AttributeDefinitions": [
@@ -1885,7 +1885,7 @@
                   "AttributeType": "S"
                 },
                 {
-                  "AttributeName": "todoId",
+                  "AttributeName": "photoId",
                   "AttributeType": "S"
                 },
                 {
@@ -1899,12 +1899,12 @@
                   "KeyType": "HASH"
                 },
                 {
-                  "AttributeName": "todoId",
+                  "AttributeName": "photoId",
                   "KeyType": "RANGE"
                 }
               ],
               "BillingMode": "PAY_PER_REQUEST",
-              "TableName": "Todos-dev",
+              "TableName": "Photos-dev",
               "LocalSecondaryIndexes": [
                 {
                   "IndexName": "CreatedAtIndex",
@@ -1928,7 +1928,7 @@
           "AttachmentsBucket": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
-              "BucketName": "serverless-c4-todo-images-congvt-dev",
+              "BucketName": "serverless-c4-photo-images-congvt-dev",
               "CorsConfiguration": {
                 "CorsRules": [
                   {
@@ -1963,7 +1963,7 @@
                     "Effect": "Allow",
                     "Principal": "*",
                     "Action": "s3:GetObject",
-                    "Resource": "arn:aws:s3:::serverless-c4-todo-images-congvt-dev/*"
+                    "Resource": "arn:aws:s3:::serverless-c4-photo-images-congvt-dev/*"
                   }
                 ]
               },
@@ -1975,57 +1975,57 @@
           "CWLSubFilterAuthLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "AuthLogGroup"
               }
             }
           },
-          "CWLSubFilterGetTodosLogGroupUsEast1": {
+          "CWLSubFilterGetPhotosLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
-                "Ref": "GetTodosLogGroup"
+                "Ref": "GetPhotosLogGroup"
               }
             }
           },
-          "CWLSubFilterCreateTodoLogGroupUsEast1": {
+          "CWLSubFilterCreatePhotoLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
-                "Ref": "CreateTodoLogGroup"
+                "Ref": "CreatePhotoLogGroup"
               }
             }
           },
-          "CWLSubFilterUpdateTodoLogGroupUsEast1": {
+          "CWLSubFilterUpdatePhotoLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
-                "Ref": "UpdateTodoLogGroup"
+                "Ref": "UpdatePhotoLogGroup"
               }
             }
           },
-          "CWLSubFilterDeleteTodoLogGroupUsEast1": {
+          "CWLSubFilterDeletePhotoLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
-                "Ref": "DeleteTodoLogGroup"
+                "Ref": "DeletePhotoLogGroup"
               }
             }
           },
           "CWLSubFilterGenerateUploadUrlLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "GenerateUploadUrlLogGroup"
@@ -2035,7 +2035,7 @@
           "CWLSubFilterApiGatewayLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#L7RHFqWzkK6Kg8w3jN#serverless-todo-app#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:f2197d82-7a38-4f7c-b15f-1755bae33d10#D7Sm1RjpsVbTbzTJdw#serverless-photo-app#dev",
               "FilterPattern": "\"SLS_ACCESS_LOG\"",
               "LogGroupName": {
                 "Ref": "ApiGatewayLogGroup"
@@ -2049,7 +2049,7 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-serverless-photo-app-dev-ServerlessDeploymentBucketName"
             }
           },
           "EnterpriseLogAccessIamRole": {
@@ -2060,61 +2060,61 @@
               ]
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-EnterpriseLogAccessIamRole"
+              "Name": "sls-serverless-photo-app-dev-EnterpriseLogAccessIamRole"
             }
           },
           "AuthLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AuthLambdaVersionZud4Wx1u9DIV6KR56ycDNozNJB82Naug3LAXBGFw"
+              "Ref": "AuthLambdaVersionC6WGWmIAo7XyzYTY7y91OUUtnum5Kogn3ho3if9Z0"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-AuthLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-photo-app-dev-AuthLambdaFunctionQualifiedArn"
             }
           },
-          "GetTodosLambdaFunctionQualifiedArn": {
+          "GetPhotosLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetTodosLambdaVersion9LL5g2Eke5WTO0iVx3fvMPpSWjQFNKzseSglAbd1gvo"
+              "Ref": "GetPhotosLambdaVersionxepFAmYVNXP9c9eW4eGu4MVaDRy3LrNhp8gVY3YTME"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-GetTodosLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-photo-app-dev-GetPhotosLambdaFunctionQualifiedArn"
             }
           },
-          "CreateTodoLambdaFunctionQualifiedArn": {
+          "CreatePhotoLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateTodoLambdaVersioni5ByGUeR19Zb6CjKjmUlIVH9z0PHftaJUkmHuiA75sw"
+              "Ref": "CreatePhotoLambdaVersionpZjhF6llrzHLLYSRhGC07jtQOBVjDRNOAqL3INxN8g"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-CreateTodoLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-photo-app-dev-CreatePhotoLambdaFunctionQualifiedArn"
             }
           },
-          "UpdateTodoLambdaFunctionQualifiedArn": {
+          "UpdatePhotoLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateTodoLambdaVersionzU9OxoYm3Usbi7U7nNDta3PNV6OdjgmVbuURGYTmA8"
+              "Ref": "UpdatePhotoLambdaVersiontenJKJZ0PqfuEmOysnZ2M9r7ogf3T9qlsRjnAfcd9k"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-UpdateTodoLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-photo-app-dev-UpdatePhotoLambdaFunctionQualifiedArn"
             }
           },
-          "DeleteTodoLambdaFunctionQualifiedArn": {
+          "DeletePhotoLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteTodoLambdaVersionj1EGVrPVyBX6SBpV6EKoWGG5IFdE4AC5jUjmzGyQhGw"
+              "Ref": "DeletePhotoLambdaVersionuCJYEvP1MP1Wm4HCTeJtPuGpETHfTBLFlGHWjgjHas"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-DeleteTodoLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-photo-app-dev-DeletePhotoLambdaFunctionQualifiedArn"
             }
           },
           "GenerateUploadUrlLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GenerateUploadUrlLambdaVersionYe5c7prJpsVqAByeSGqZSJiQnotM7IPGbcKRlCHd9x4"
+              "Ref": "GenerateUploadUrlLambdaVersionEPc2aXy3UBVgULPfYJVUN3Bw9WWBUxW5vpFTEWZ1M"
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-GenerateUploadUrlLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-photo-app-dev-GenerateUploadUrlLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -2140,7 +2140,7 @@
               ]
             },
             "Export": {
-              "Name": "sls-serverless-todo-app-dev-ServiceEndpoint"
+              "Name": "sls-serverless-photo-app-dev-ServiceEndpoint"
             }
           }
         }
@@ -2239,28 +2239,28 @@
       "Auth": {
         "handler": "s_Auth.handler",
         "events": [],
-        "name": "serverless-todo-app-dev-Auth",
+        "name": "serverless-photo-app-dev-Auth",
         "package": {
-          "artifact": ".serverless\\serverless-todo-app.zip"
+          "artifact": ".serverless\\serverless-photo-app.zip"
         },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AuthLambdaVersionZud4Wx1u9DIV6KR56ycDNozNJB82Naug3LAXBGFw"
+        "versionLogicalId": "AuthLambdaVersionC6WGWmIAo7XyzYTY7y91OUUtnum5Kogn3ho3if9Z0"
       },
-      "GetTodos": {
-        "handler": "s_GetTodos.handler",
+      "GetPhotos": {
+        "handler": "s_GetPhotos.handler",
         "iamRoleStatements": [
           {
-            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetTodosIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetPhotosIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
           }
         ],
         "events": [
           {
             "http": {
               "method": "get",
-              "path": "todos",
+              "path": "photos",
               "cors": {
                 "origin": "*",
                 "methods": [
@@ -2290,28 +2290,28 @@
             }
           }
         ],
-        "name": "serverless-todo-app-dev-GetTodos",
+        "name": "serverless-photo-app-dev-GetPhotos",
         "package": {
-          "artifact": ".serverless\\serverless-todo-app.zip"
+          "artifact": ".serverless\\serverless-photo-app.zip"
         },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetTodosLambdaVersion9LL5g2Eke5WTO0iVx3fvMPpSWjQFNKzseSglAbd1gvo"
+        "versionLogicalId": "GetPhotosLambdaVersionxepFAmYVNXP9c9eW4eGu4MVaDRy3LrNhp8gVY3YTME"
       },
-      "CreateTodo": {
-        "handler": "s_CreateTodo.handler",
+      "CreatePhoto": {
+        "handler": "s_CreatePhoto.handler",
         "iamRoleStatements": [
           {
-            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateTodoIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreatePhotoIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
           }
         ],
         "events": [
           {
             "http": {
               "method": "post",
-              "path": "todos",
+              "path": "photos",
               "cors": {
                 "origin": "*",
                 "methods": [
@@ -2340,7 +2340,7 @@
               "request": {
                 "schemas": {
                   "application/json": {
-                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodTodosPostApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
+                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodPhotosPostApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
                   }
                 }
               },
@@ -2348,28 +2348,28 @@
             }
           }
         ],
-        "name": "serverless-todo-app-dev-CreateTodo",
+        "name": "serverless-photo-app-dev-CreatePhoto",
         "package": {
-          "artifact": ".serverless\\serverless-todo-app.zip"
+          "artifact": ".serverless\\serverless-photo-app.zip"
         },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateTodoLambdaVersioni5ByGUeR19Zb6CjKjmUlIVH9z0PHftaJUkmHuiA75sw"
+        "versionLogicalId": "CreatePhotoLambdaVersionpZjhF6llrzHLLYSRhGC07jtQOBVjDRNOAqL3INxN8g"
       },
-      "UpdateTodo": {
-        "handler": "s_UpdateTodo.handler",
+      "UpdatePhoto": {
+        "handler": "s_UpdatePhoto.handler",
         "iamRoleStatements": [
           {
-            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdateTodoIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdatePhotoIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
           }
         ],
         "events": [
           {
             "http": {
               "method": "patch",
-              "path": "todos/{todoId}",
+              "path": "photos/{photoId}",
               "cors": {
                 "origin": "*",
                 "methods": [
@@ -2399,28 +2399,28 @@
             }
           }
         ],
-        "name": "serverless-todo-app-dev-UpdateTodo",
+        "name": "serverless-photo-app-dev-UpdatePhoto",
         "package": {
-          "artifact": ".serverless\\serverless-todo-app.zip"
+          "artifact": ".serverless\\serverless-photo-app.zip"
         },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "UpdateTodoLambdaVersionzU9OxoYm3Usbi7U7nNDta3PNV6OdjgmVbuURGYTmA8"
+        "versionLogicalId": "UpdatePhotoLambdaVersiontenJKJZ0PqfuEmOysnZ2M9r7ogf3T9qlsRjnAfcd9k"
       },
-      "DeleteTodo": {
-        "handler": "s_DeleteTodo.handler",
+      "DeletePhoto": {
+        "handler": "s_DeletePhoto.handler",
         "iamRoleStatements": [
           {
-            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteTodoIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeletePhotoIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
           }
         ],
         "events": [
           {
             "http": {
               "method": "delete",
-              "path": "todos/{todoId}",
+              "path": "photos/{photoId}",
               "cors": {
                 "origin": "*",
                 "methods": [
@@ -2450,15 +2450,15 @@
             }
           }
         ],
-        "name": "serverless-todo-app-dev-DeleteTodo",
+        "name": "serverless-photo-app-dev-DeletePhoto",
         "package": {
-          "artifact": ".serverless\\serverless-todo-app.zip"
+          "artifact": ".serverless\\serverless-photo-app.zip"
         },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "DeleteTodoLambdaVersionj1EGVrPVyBX6SBpV6EKoWGG5IFdE4AC5jUjmzGyQhGw"
+        "versionLogicalId": "DeletePhotoLambdaVersionuCJYEvP1MP1Wm4HCTeJtPuGpETHfTBLFlGHWjgjHas"
       },
       "GenerateUploadUrl": {
         "handler": "s_GenerateUploadUrl.handler",
@@ -2474,7 +2474,7 @@
           {
             "http": {
               "method": "post",
-              "path": "todos/{todoId}/attachment",
+              "path": "photos/{photoId}/attachment",
               "cors": {
                 "origin": "*",
                 "methods": [
@@ -2504,15 +2504,15 @@
             }
           }
         ],
-        "name": "serverless-todo-app-dev-GenerateUploadUrl",
+        "name": "serverless-photo-app-dev-GenerateUploadUrl",
         "package": {
-          "artifact": ".serverless\\serverless-todo-app.zip"
+          "artifact": ".serverless\\serverless-photo-app.zip"
         },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GenerateUploadUrlLambdaVersionYe5c7prJpsVqAByeSGqZSJiQnotM7IPGbcKRlCHd9x4"
+        "versionLogicalId": "GenerateUploadUrlLambdaVersionEPc2aXy3UBVgULPfYJVUN3Bw9WWBUxW5vpFTEWZ1M"
       }
     },
     "resources": {
@@ -2531,7 +2531,7 @@
             }
           }
         },
-        "TodosTable": {
+        "PhotosTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
             "AttributeDefinitions": [
@@ -2540,7 +2540,7 @@
                 "AttributeType": "S"
               },
               {
-                "AttributeName": "todoId",
+                "AttributeName": "photoId",
                 "AttributeType": "S"
               },
               {
@@ -2554,12 +2554,12 @@
                 "KeyType": "HASH"
               },
               {
-                "AttributeName": "todoId",
+                "AttributeName": "photoId",
                 "KeyType": "RANGE"
               }
             ],
             "BillingMode": "PAY_PER_REQUEST",
-            "TableName": "Todos-dev",
+            "TableName": "Photos-dev",
             "LocalSecondaryIndexes": [
               {
                 "IndexName": "CreatedAtIndex",
@@ -2583,7 +2583,7 @@
         "AttachmentsBucket": {
           "Type": "AWS::S3::Bucket",
           "Properties": {
-            "BucketName": "serverless-c4-todo-images-congvt-dev",
+            "BucketName": "serverless-c4-photo-images-congvt-dev",
             "CorsConfiguration": {
               "CorsRules": [
                 {
@@ -2618,7 +2618,7 @@
                   "Effect": "Allow",
                   "Principal": "*",
                   "Action": "s3:GetObject",
-                  "Resource": "arn:aws:s3:::serverless-c4-todo-images-congvt-dev/*"
+                  "Resource": "arn:aws:s3:::serverless-c4-photo-images-congvt-dev/*"
                 }
               ]
             },
@@ -2634,8 +2634,8 @@
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
       "org": "deltadivine99",
-      "app": "serverless-todo-app",
-      "service": "serverless-todo-app",
+      "app": "serverless-photo-app",
+      "service": "serverless-photo-app",
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
       },
@@ -2649,16 +2649,16 @@
         "$ref": "$[\"service\"][\"resources\"]"
       }
     },
-    "app": "serverless-todo-app",
+    "app": "serverless-photo-app",
     "org": "deltadivine99",
     "layers": {},
     "isDashboardMonitoringPreconfigured": true,
     "isDashboardAppPreconfigured": true,
     "orgUid": "f2197d82-7a38-4f7c-b15f-1755bae33d10",
-    "appUid": "L7RHFqWzkK6Kg8w3jN"
+    "appUid": "D7Sm1RjpsVbTbzTJdw"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-todo-app/dev/1664346113269-2022-09-28T06:21:53.269Z",
+    "artifactDirectoryName": "serverless/serverless-photo-app/dev/1665542582374-2022-10-12T02:43:02.374Z",
     "artifact": ""
   }
 }

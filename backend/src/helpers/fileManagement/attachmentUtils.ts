@@ -11,20 +11,20 @@ const s3 = new XAWS.S3({ signatureVersion: 'v4' })
 const docClient: DocumentClient = new XAWS.DynamoDB.DocumentClient()
 const s3Bucket = process.env.ATTACHMENT_S3_BUCKET
 const urlExpiration = process.env.SIGNED_URL_EXPIRATION
-const todosTable = process.env.TODOS_TABLE
+const photosTable = process.env.PHOTOS_TABLE
 // TODO: Implement the fileStogare logic
-export async function createAttachmentPresignedUrl(event: APIGatewayProxyEvent,todoId: string): Promise<string> {
+export async function createAttachmentPresignedUrl(event: APIGatewayProxyEvent,photoId: string): Promise<string> {
     logger.info(`Get S3 pre-signed url: `);
     const userId = getUserId(event)
     const uploadUrl = s3.getSignedUrl('putObject', {
         Bucket: s3Bucket,
-        Key: todoId,
+        Key: photoId,
         Expires: + urlExpiration
     })
 
     await docClient.update({
-        TableName: todosTable,
-        Key: { userId, todoId },
+        TableName: photosTable,
+        Key: { userId, photoId },
         UpdateExpression: "set attachmentUrl=:URL",
         ExpressionAttributeValues: {
           ":URL": uploadUrl.split("?")[0]

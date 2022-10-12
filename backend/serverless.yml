@@ -1,7 +1,7 @@
 # TODO: Change the name of the org 
 org: deltadivine99
-app: serverless-todo-app
-service: serverless-todo-app
+app: serverless-photo-app
+service: serverless-photo-app
 
 plugins:
   - serverless-webpack
@@ -22,9 +22,9 @@ provider:
   # Use these variables in the functions and resouorces section below. For example, 
   # ${self:provider.environment.ATTACHMENT_S3_BUCKET}
   environment:
-    TODOS_TABLE: Todos-${self:provider.stage}
-    TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-congvt-${self:provider.stage}
+    PHOTOS_TABLE: Photos-${self:provider.stage}
+    PHOTOS_CREATED_AT_INDEX: CreatedAtIndex
+    ATTACHMENT_S3_BUCKET: serverless-c4-photo-images-congvt-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     AUTH_0_SECRET: -0WQVQUmbSU6iJcFxe9t5r6DqxAHGSnu2V69jw2cv0S0efKL0SvdprYKXT54jMQI
 
@@ -49,8 +49,8 @@ functions:
 
   # TODO: Configure this function - 
   # Provide iamRoleStatements property for performing Actions on DynamoDB
-  GetTodos:
-    handler: src/lambda/http/getTodos.handler
+  GetPhotos:
+    handler: src/lambda/http/getPhotos.handler
     iamRoleStatements:
       - Effect: Allow
         Action: 
@@ -61,7 +61,7 @@ functions:
     events:
       - http:
           method: get
-          path: todos
+          path: photos
           cors: true
           authorizer: Auth
 
@@ -69,8 +69,8 @@ functions:
   # Provide iamRoleStatements property. Decide the Actions and AWS Resource. 
   # To refer to an AWS resource defined in the "Resources" section, you can use "Resource: !GetAtt <resource-name>.Arn"
   # To validate incoming HTTP requests, we have provided the request schemas in function definition below. 
-  CreateTodo:
-    handler: src/lambda/http/createTodo.handler
+  CreatePhoto:
+    handler: src/lambda/http/createPhoto.handler
     iamRoleStatements:
       - Effect: Allow
         Action: 
@@ -79,17 +79,17 @@ functions:
     events:
       - http:
           method: post
-          path: todos
+          path: photos
           cors: true
           authorizer: Auth
           request:
             schemas:
-              application/json: ${file(models/create-todo-model.json)}
+              application/json: ${file(models/create-photo-model.json)}
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements, and request schemas
-  UpdateTodo:
-    handler: src/lambda/http/updateTodo.handler
+  UpdatePhoto:
+    handler: src/lambda/http/updatePhoto.handler
     iamRoleStatements:
       - Effect: Allow
         Action: 
@@ -98,14 +98,14 @@ functions:
     events:
       - http:
           method: patch
-          path: todos/{todoId}
+          path: photos/{photoId}
           cors: true
           authorizer: Auth
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
-  DeleteTodo:
-    handler: src/lambda/http/deleteTodo.handler
+  DeletePhoto:
+    handler: src/lambda/http/deletePhoto.handler
     iamRoleStatements:
       - Effect: Allow
         Action: 
@@ -114,7 +114,7 @@ functions:
     events:
       - http:
           method: delete
-          path: todos/{todoId}
+          path: photos/{photoId}
           cors: true
           authorizer: Auth
 
@@ -135,7 +135,7 @@ functions:
     events:
       - http:
           method: post
-          path: todos/{todoId}/attachment
+          path: photos/{photoId}/attachment
           cors: true
           authorizer: Auth
 
@@ -156,25 +156,25 @@ resources:
           Ref: ApiGatewayRestApi
     
     # TODO: Create a DynamoDB table with local secondary index and a composite key
-    TodosTable:
+    PhotosTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: S
-          - AttributeName: todoId
+          - AttributeName: photoId
             AttributeType: S
           - AttributeName: createdAt
             AttributeType: S
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
-          - AttributeName: todoId
+          - AttributeName: photoId
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.TODOS_TABLE}
+        TableName: ${self:provider.environment.PHOTOS_TABLE}
         LocalSecondaryIndexes:
-          - IndexName: ${self:provider.environment.TODOS_CREATED_AT_INDEX}
+          - IndexName: ${self:provider.environment.PHOTOS_CREATED_AT_INDEX}
             KeySchema:
               - AttributeName: userId
                 KeyType: HASH
